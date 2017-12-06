@@ -9,6 +9,7 @@
     "src"
   ],
   "dependencies": {
+    "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "truffle-blockchain-utils": "^0.0.3",
     "truffle-hdwallet-provider": "^0.0.3",
@@ -34,7 +35,8 @@
     "standard": "^10.0.3"
   },
   "scripts": {
-    "start": "node src/index.js info",
+    "kitties": "node src/index.js kitties",
+    "inf": "node src/index.js info",
     "build": "solc --allow-paths node_modules/zeppelin-solidity/**/*.sol -o build --bin --abi --overwrite zeppelin-solidity/=node_modules/zeppelin-solidity/ contracts/**",
     "deploy:testrpc": "ethdeploy config/testrpc.config.js",
     "test": "yarn build && scripts/test.sh",
