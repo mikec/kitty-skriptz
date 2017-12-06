@@ -1,12 +1,11 @@
 import fs from 'fs'
-import eth from './eth'
 
 export const getKittyCore = getContractFn('KittyCore')
 
 function getContractFn (contractName) {
   const abi = JSON.parse(fs.readFileSync(`build/${contractName}.abi`).toString())
   const bin = fs.readFileSync(`build/${contractName}.bin`).toString()
-  return async () => {
+  return async (eth) => {
     const accounts = await eth.accounts()
     const ethContract = eth.contract(abi, bin, {
       from: accounts[0],
