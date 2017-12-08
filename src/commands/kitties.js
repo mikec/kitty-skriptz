@@ -1,16 +1,18 @@
 // import { getKittyCore } from '../contracts'
-import Eth from 'ethjs'
+import fs from 'fs'
+// import Eth from 'ethjs'
+import EthFilter from '../ethfilter/EthFilter'
 
-export default async (_, conf, eth) => {
-  // const block = await eth.getBlockByNumber(4683827, true)
-  // console.log(block)
+const kittyCoreAbi = JSON.parse(fs.readFileSync(`build/KittyCore.abi`).toString())
 
-  const logs = await eth.getLogs({
-    fromBlock: new Eth.BN('4683827'),
-    toBlock: new Eth.BN('4683827'),
-    address: conf.kittyCoreAddress,
-    topics: [null]
+export default async (argv, conf, eth) => {
+  const ethFilter = EthFilter(conf.providerUrl)
+
+  const kittyCoreFilter = ethFilter.contract(conf.kittyCoreAddress, kittyCoreAbi)
+  const birthEvents = await kittyCoreFilter.events({
+    fromBlock: 4688289,
+    toBlock: 4688290,
+    name: 'Birth'
   })
-  console.log(logs)
-  console.log('')
+  console.log(birthEvents)
 }

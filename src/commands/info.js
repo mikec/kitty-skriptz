@@ -1,6 +1,6 @@
 import { getKittyCore } from '../contracts'
 
-export default async (_, conf, eth) => {
+export default async (argv, conf, eth) => {
   const kittyCoreContract = await getKittyCore(eth)
   const kc = await kittyCoreContract.at(conf.kittyCoreAddress)
   const name = await prop(kc, 'name')
