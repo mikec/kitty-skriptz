@@ -1,9 +1,12 @@
 import _ from 'lodash'
 
-export default (eth, address, abi, _tmpABI) => {
+export default (eth, address, abi) => {
   return async (filterParams) => {
-    const { fromBlock, toBlock, name } = filterParams
-    const { topic } = abi[name]
+    let { fromBlock, toBlock, name } = filterParams
+    let topic = null
+    if (name) {
+      topic = abi[name].topic
+    }
     const logResp = await eth.getLogs({
       fromBlock,
       toBlock,
@@ -11,6 +14,16 @@ export default (eth, address, abi, _tmpABI) => {
       topics: [topic]
     })
     return _.map(logResp, (event) => {
+
+      // TODO handle null name (filter all events)
+      /* if (!name) {
+        for (var p in abi) {
+          if (abi[p].topic && abi[p].topic === event.topics[0]) {
+            name = p
+          }
+        }
+      } */
+
       return _.extend(event, {
         name,
         arguments: abi[name].decode(event.data)
