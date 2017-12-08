@@ -7,17 +7,14 @@ function fnObject (fnDef) {
 }
 
 function eventObject (eventDef) {
-  const evtStr = `${eventDef.name}(${
-    _.join(
-      _.map(eventDef.inputs, (input) => {
-        return input.type
-      }), ','
-    )
-  })`
+  const inputTypes = _.map(eventDef.inputs, input => input.type)
+  const inputNames = _.map(eventDef.inputs, input => input.name)
+  const evtStr = `${eventDef.name}(${_.join(inputTypes, ',')})`
   return {
     topic: `0x${keccak256(evtStr)}`,
     decode: (data) => {
-      return ethjsAbi.decodeEvent(eventDef, data)
+      const args = ethjsAbi.decodeEvent(eventDef, data)
+      return _.pick(args, inputNames)
     }
   }
 }
