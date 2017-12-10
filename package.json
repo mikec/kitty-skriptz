@@ -9,6 +9,7 @@
     "src"
   ],
   "dependencies": {
+    "axios": "^0.17.1",
     "ethjs-abi": "^0.2.1",
     "js-sha3": "^0.7.0",
     "lodash": "^4.17.4",
@@ -37,7 +38,9 @@
     "standard": "^10.0.3"
   },
   "scripts": {
-    "kitties": "node src/index.js kitties",
+    "listings": "node src/index.js listings",
+    "sales": "node src/index.js sales",
+    "sale-analysis": "node src/index.js sale-analysis",
     "inf": "node src/index.js info",
     "build": "solc --allow-paths node_modules/zeppelin-solidity/**/*.sol -o build --bin --abi --overwrite zeppelin-solidity/=node_modules/zeppelin-solidity/ contracts/**",
     "test": "jest",

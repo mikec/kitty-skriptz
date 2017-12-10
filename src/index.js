@@ -12,4 +12,8 @@ const argv = require('yargs')
   .command('stuff', 'stuuuuf')
   .argv
 
-require(`./commands/${argv._[0]}`).default(argv, conf, eth)
+require(`./commands/${argv._[0]}`).default(argv, conf, eth).then(() => {
+  console.log('')
+}, (err) => {
+  console.error(err)
+})

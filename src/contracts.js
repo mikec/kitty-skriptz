@@ -1,6 +1,7 @@
 import fs from 'fs'
 
 export const getKittyCore = getContractFn('KittyCore')
+export const getSaleClockAuction = getContractFn('SaleClockAuction')
 
 function getContractFn (contractName) {
   const abi = JSON.parse(fs.readFileSync(`build/${contractName}.abi`).toString())

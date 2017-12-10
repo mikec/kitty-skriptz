@@ -27,8 +27,8 @@ export default async (argv, conf, eth) => {
 
   const txs = await kittyCoreFilter.transactions({
     // fromBlock: 4605167,
-    fromBlock: 4695000,
-    toBlock: 4695238,
+    fromBlock: 4702800,
+    toBlock: 4702888,
     name: 'createSaleAuction'
   })
   const fnOutputs = _.map(txs, (t) => {
