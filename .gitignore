@@ -4,3 +4,4 @@ build
 lib
 package-lock.json
 secrets.json
+data
